@@ -1,9 +1,9 @@
 from io import StringIO
-from Fields import *
+import Fields
 
 
 class Parse():
-    """Parse the Vcard, the idea is that the parser returns something like this:
+    """Parse the Vcard, the idea is that the parser returns something like this
 
         [
             {
@@ -47,19 +47,23 @@ class Parse():
         self.vcard = vobj
         self.data = []
         self.buff = []
+        self
 
     def parse(self):
+        objects = {}
         for key, attributes, dictofattrs, value in self.parse_attr(self.vcard):
             self.data.append({key: {"kvattr": dictofattrs,
                                     "attributes": [a for a in attributes],
                                     "value": value.split(";")}})
 
-            # data = self.data[2]
-            # name = N(data['N']['attributes'],  data['N']['kvattr'], data['N']['value'], 'N')
-            # ipdb> name.vformat()
-            # 'N;;language=en-us:Doge;Snoop;C;Rapper;Jr' #todo, remove ";" if None
+            # Dynamic creation of Field objects
+            if key.title() not in ("Begin", "Rev", "End"):
+                field_type = getattr(Fields, key.title())
 
+                objects[key.lower()] = field_type([a for a in attributes],
+                                                  dictofattrs, value, key)
 
+        return objects
 
     def parse_attr(self, vcard):
         buf = StringIO()
@@ -72,7 +76,6 @@ class Parse():
             # Line that ends in "=0D=0A=", with the next one, until
             # The sequence is not found
             if kwatters.get('encoding') == 'quoted-printable':
-                # import ipdb;ipdb.set_trace()
                 buf.write(value)
                 while True:
 
@@ -104,14 +107,3 @@ class Parse():
 
     def serialize(self, key, attributes, value):
         self.data.append({key: {"Values": value, "attributes": attributes}})
-
-    # def create(self):
-
-y = open('test.vcf')
-
-x = Parse(y)
-
-# x.parse()
-
-x.parse()
-import ipdb; ipdb.set_trace()

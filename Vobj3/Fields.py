@@ -6,6 +6,7 @@ class FieldTypes():
         self.values = val
         self.is_preferred = False
         self.key = key
+        self.parse_attributes()
 
     def parse_attributes(self):
         self.is_preferred = False
@@ -23,12 +24,12 @@ class FieldTypes():
         return "%s;%s;%s:%s" % (self.key, attr, kvattr, values)
 
     def __str__(self):
-        # Return the value
+        # Return the value on str(object)
         values = ", ".join(self.values)
-        return "%s" % values
+        return values
 
     def __repr__(self):
-        return "<Vcard %s field Object>" % __class__.__name__
+        return "<Vcard %s Field Object>" % self.__class__.__name__
 
 
 class Version(FieldTypes):
@@ -72,7 +73,6 @@ class Tel(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.parse_attributes()
 
 
 class Adr(FieldTypes):
@@ -90,7 +90,6 @@ class Adr(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.parse_attributes()
         self.parse_address()
 
     def parse_address(self):
@@ -117,3 +116,5 @@ class Email(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.email = self.values[-1]
+
