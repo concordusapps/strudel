@@ -16,17 +16,19 @@ class FieldTypes():
             self.types = self.values
 
     def vformat(self):
-        kvattr = ";".join(["%s=%s" % (key, value)
+        kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
                            for key, value in self.kvattributes.items()])
 
-        attr = ";".join(self.attributes)
+        if kvattr:
+            kvattr = ";" + kvattr
+
+        attr = ";".join([x.upper() for x in self.attributes])
         values = ";".join(self.values)
-        return "%s;%s;%s:%s" % (self.key, attr, kvattr, values)
+        return "%s;%s%s:%s" % (self.key, attr, kvattr, values)
 
     def __str__(self):
         # Return the value on str(object)
-        values = ", ".join(self.values)
-        return values
+        return ", ".join([x for x in self.values if x])
 
     def __repr__(self):
         return "<Vcard %s Field Object>" % self.__class__.__name__

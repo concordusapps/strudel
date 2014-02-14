@@ -2,6 +2,22 @@ from io import StringIO
 import Fields
 
 
+class Vobj(object):
+
+    def __init__(self, vobj):
+        self.parse(vobj)
+
+    def parse(self, vobj):
+        if isinstance(vobj, str):
+            vobj = open(vobj)
+
+        y = Parse(vobj)
+        objects = y.parse()
+
+        for k, v in objects.items():
+            setattr(self, k, v)
+
+
 class Parse():
     """Parse the Vcard, the idea is that the parser returns something like this
 
@@ -61,7 +77,7 @@ class Parse():
                 field_type = getattr(Fields, key.title())
 
                 objects[key.lower()] = field_type([a for a in attributes],
-                                                  dictofattrs, value, key)
+                                                  dictofattrs, value.split(";"), key)
 
         return objects
 
