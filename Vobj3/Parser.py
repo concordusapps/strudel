@@ -2,22 +2,6 @@ from io import StringIO
 import Fields
 
 
-class Vobj(object):
-
-    def __init__(self, vobj):
-        self.parse(vobj)
-
-    def parse(self, vobj):
-        if isinstance(vobj, str):
-            vobj = open(vobj)
-
-        y = Parse(vobj)
-        objects = y.parse()
-
-        for k, v in objects.items():
-            setattr(self, k, v)
-
-
 class Parse():
     """Parse the Vcard, the idea is that the parser returns something like this
 
@@ -68,16 +52,14 @@ class Parse():
     def parse(self):
         objects = {}
         for key, attributes, dictofattrs, value in self.parse_attr(self.vcard):
-            self.data.append({key: {"kvattr": dictofattrs,
-                                    "attributes": [a for a in attributes],
-                                    "value": value.split(";")}})
-
             # Dynamic creation of Field objects
             if key.title() not in ("Begin", "Rev", "End"):
                 field_type = getattr(Fields, key.title())
 
                 objects[key.lower()] = field_type([a for a in attributes],
-                                                  dictofattrs, value.split(";"), key)
+                                                  dictofattrs, value.split(
+                                                      ";"),
+                                                  key)
 
         return objects
 

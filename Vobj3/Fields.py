@@ -10,7 +10,7 @@ class FieldTypes():
 
     def parse_attributes(self):
         self.is_preferred = False
-        if "PREF" in self.attributes:
+        if "pref" in self.attributes:
             self.is_preferred = True
             del self.attributes[self.attributes.index("PREF")]
             self.types = self.values
