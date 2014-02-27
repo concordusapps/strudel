@@ -41,6 +41,13 @@ class Version(FieldTypes):
         self.version = self.values[0]
 
 
+class Prodid(FieldTypes):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.prodid = self.values[0]
+
+
 class N(FieldTypes):
 
     def __init__(self, *args, **kwargs):
@@ -119,4 +126,3 @@ class Email(FieldTypes):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.email = self.values[-1]
-

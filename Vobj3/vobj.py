@@ -1,4 +1,4 @@
-from .parser import Parse
+from .Parser import Parse
 
 
 class Vobj(object):
