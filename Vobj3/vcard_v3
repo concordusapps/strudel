@@ -1,0 +1,81 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//iOS 7.0.4//EN
+N:secondname;firstnane;;;
+FN:firstnane secondname
+ORG:company;
+item1.EMAIL;type=INTERNET;type=pref:email@1.com
+TEL;type=WORK;type=VOICE;type=pref:(494) 659-7646
+TEL;type=WORK;type=FAX:(243) 797-8464
+TEL;type=HOME;type=VOICE:1 (222) 222-2222
+TEL;type=HOME;type=FAX:1 (346) 465-6594
+TEL;type=CELL;type=VOICE:(676) 438-9464
+TEL;type=PAGER:(946) 434-2466
+item2.TEL:(494) 389-4346
+item2.X-ABLabel:_$!<AssistantPhone>!$_
+item3.TEL:(461) 376-4613
+item3.X-ABLabel:_$!<Car>!$_
+item4.TEL:1 (234) 567-8900
+item4.X-ABLabel:_$!<Radio>!$_
+item5.TEL:(643) 154-6794
+item5.X-ABLabel:_$!<CompanyMain>!$_
+item6.ADR;type=WORK;type=pref:;;s\ndoge work;;CA;95835;United States
+item7.ADR;type=HOME:;;1234 shakedown street\n;sacramento;CA;95835;United States
+item8.URL;type=pref:xjsjdjsk.com
+item8.X-ABLabel:_$!<HomePage>!$_
+BDAY;value=date:1604-02-24
+PHOTO;ENCODING=b;TYPE=JPEG:/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAICAgICAQICAgIC
+ AgIDAwYEAwMDAwcFBQQGCAcICAgHCAgJCg0LCQkMCggICw8LDA0ODg4OCQsQEQ8OEQ0ODg7/2w
+ BDAQICAgMDAwYEBAYOCQgJDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4O
+ Dg4ODg4ODg4ODg7/wAARCABAAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAw
+ QFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0Kx
+ wRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3
+ R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW
+ 19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQ
+ oL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
+ YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eH
+ l6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna
+ 4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDLkauj8B2fn+LZ7i4/497GJ5P3v99vl/
+ 8AQWZv+A1ykrV6j4Fj+w+A9U1D/l4ubvy4v91V+9+cjCv6x47zL6tlFb+97v3/APAP5s4QwX1j
+ M6f933vuOljuvIv/ALP/AK/96/8A103qv65Ktxgfd7GuX8SfZ57+G4t/3H2bb/ovy/u9q/nt+7
+ 6jFbyL59/D9n8j/j7STypf7rMy/M309en6Vm6jNBBf/Z/tFv8Aaftbx/vYd/8AF5n3V5++jf8A
+ fI45FfyZOr7x/Q6OYvLyw+36pb3Fv/rYlklllhb9591V/wCAnd69c9MVxH2WCD/R/tFh/aMvm/
+ 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
+X-MS-IMADDRESS;type=pref:aiminstant@1.com
+IMPP;type=pref:x-apple:aiminstant@1.com
+item9.X-ABDATE;type=pref:2013-02-24
+item9.X-ABLabel:_$!<Anniversary>!$_
+item10.X-ABRELATEDNAMES;type=pref:the bossman
+item10.X-ABLabel:_$!<Manager>!$_
+END:VCARD

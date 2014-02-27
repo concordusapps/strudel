@@ -1,5 +1,5 @@
 from io import StringIO
-import Fields
+from . import Fields
 
 
 class Parse():
