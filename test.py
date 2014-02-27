@@ -8,16 +8,9 @@ class TestVobj:
         self.setup()
 
     def setup(self):
-
-        with open('Vobj3/vcard_v3', 'r') as file:
-            data = file.read()
-
-        return data
+        fixture = 'Vobj3/vcard_v3'
+        return open(fixture)
 
     def testParse(self, data):
-        x = vobj.Vobj(data)
-        # import ipdb; ipdb.set_trace()
-
-testobj = TestVobj()
-dump = testobj.setup()
-testobj.testParse(dump)
+        testobj = TestVobj()
+        vobj.Vobj(testobj.setup())
