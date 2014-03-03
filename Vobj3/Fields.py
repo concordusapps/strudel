@@ -35,6 +35,7 @@ class FieldTypes():
 
 
 class Version(FieldTypes):
+    """The version of the vCard specification."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,6 +43,7 @@ class Version(FieldTypes):
 
 
 class Prodid(FieldTypes):
+    """The identifier for the product that created the vCard object."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -49,6 +51,8 @@ class Prodid(FieldTypes):
 
 
 class N(FieldTypes):
+    """A structured representation of the name of the person, place or thing
+    associated with the vCard """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -56,7 +60,7 @@ class N(FieldTypes):
 
 
 class Fn(FieldTypes):
-
+    """The formatted name string associated with the vCard"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.full_name = self.values[0]
@@ -71,6 +75,8 @@ class Org(FieldTypes):
 
 
 class Title(FieldTypes):
+    """Specifies the job title, functional position or function of the
+    individual associated with the vCard """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -109,6 +115,9 @@ class Adr(FieldTypes):
 
 
 class Label(FieldTypes):
+    """Represents the actual text that should be put on the mailing label
+    when delivering a physical package to the person/object associated with
+    the vCard (related to the ADR property)."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

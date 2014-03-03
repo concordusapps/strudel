@@ -72,7 +72,9 @@ class Parse():
             # That there will be a line cont. sequence in the line
             # So here, we check for the encoding type, and merge any
             # Line that ends in "=0D=0A=", with the next one, until
-            # The sequence is not found
+            # The sequence is not found. "OD" and "OA" are the carriage return
+            # and line feed character in hexadecimal.
+
             if kwatters.get('encoding') == 'quoted-printable':
                 buf.write(value)
                 while True:
