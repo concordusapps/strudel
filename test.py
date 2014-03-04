@@ -8,7 +8,8 @@ class TestVobj:
         self.setup()
 
     def setup(self):
-        fixture = 'Vobj3/vcard_v3'
+        # fixture = 'Vobj3/fixtures/vcard_v3.0'
+        fixture = 'Vobj3/vcard_v2.1'
         return open(fixture)
 
     def testParse(self, data):

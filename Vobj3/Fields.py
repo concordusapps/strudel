@@ -61,6 +61,7 @@ class N(FieldTypes):
 
 class Fn(FieldTypes):
     """The formatted name string associated with the vCard"""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.full_name = self.values[0]

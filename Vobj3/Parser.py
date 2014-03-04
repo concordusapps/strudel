@@ -47,7 +47,6 @@ class Parse():
         self.vcard = vobj
         self.data = []
         self.buff = []
-        self
 
     def parse(self):
         objects = {}
