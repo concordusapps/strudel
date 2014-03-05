@@ -56,8 +56,8 @@ class Parse():
                 field_type = getattr(Fields, key.title())
 
                 objects[key.lower()] = field_type([a for a in attributes],
-                                                  dictofattrs, value.split(
-                                                      ";"),
+                                                  dictofattrs,
+                                                  value.split(";"),
                                                   key)
 
         return objects
@@ -65,7 +65,7 @@ class Parse():
     def parse_attr(self, vcard):
         buf = StringIO()
         for line in self.vcard:
-            key, sattrs, kwatters, value = self.splitattrs(line.strip())
+            key, sattrs, kwattrs, value = self.splitattrs(line.strip())
 
             # When the encoding type is quoted-printable, this means
             # That there will be a line cont. sequence in the line
@@ -74,7 +74,7 @@ class Parse():
             # The sequence is not found. "OD" and "OA" are the carriage return
             # and line feed character in hexadecimal.
 
-            if kwatters.get('encoding') == 'quoted-printable':
+            if kwattrs.get('encoding') == 'quoted-printable':
                 buf.write(value)
                 while True:
 
@@ -85,7 +85,7 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
-            yield key, sattrs, kwatters, value
+            yield key, sattrs, kwattrs, value
 
     def splitattrs(self, line):
         names, value = line.split(':', 1)
