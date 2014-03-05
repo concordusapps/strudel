@@ -47,7 +47,6 @@ class Parse():
         self.vcard = vobj
         self.data = []
         self.buff = []
-        self
 
     def parse(self):
         objects = {}
@@ -57,8 +56,8 @@ class Parse():
                 field_type = getattr(Fields, key.title())
 
                 objects[key.lower()] = field_type([a for a in attributes],
-                                                  dictofattrs, value.split(
-                                                      ";"),
+                                                  dictofattrs,
+                                                  value.split(";"),
                                                   key)
 
         return objects
@@ -66,14 +65,16 @@ class Parse():
     def parse_attr(self, vcard):
         buf = StringIO()
         for line in self.vcard:
-            key, sattrs, kwatters, value = self.splitattrs(line.strip())
+            key, sattrs, kwattrs, value = self.splitattrs(line.strip())
 
             # When the encoding type is quoted-printable, this means
             # That there will be a line cont. sequence in the line
             # So here, we check for the encoding type, and merge any
             # Line that ends in "=0D=0A=", with the next one, until
-            # The sequence is not found
-            if kwatters.get('encoding') == 'quoted-printable':
+            # The sequence is not found. "OD" and "OA" are the carriage return
+            # and line feed character in hexadecimal.
+
+            if kwattrs.get('encoding') == 'quoted-printable':
                 buf.write(value)
                 while True:
 
@@ -84,7 +85,7 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
-            yield key, sattrs, kwatters, value
+            yield key, sattrs, kwattrs, value
 
     def splitattrs(self, line):
         names, value = line.split(':', 1)
