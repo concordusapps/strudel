@@ -15,3 +15,8 @@ class TestVobj:
     def testParse(self, data):
         testobj = TestVobj()
         vobj.Vobj(testobj.setup())
+
+import ipdb; ipdb.set_trace()
+testobj = TestVobj()
+vobj.Vobj(testobj.setup())
+testobj.vformat()

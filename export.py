@@ -16,4 +16,4 @@ class VcardExporter(Vobj):
 
         target = open(filename, 'w+')
 
-        target.close
+        target.close()
