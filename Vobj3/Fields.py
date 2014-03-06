@@ -1,4 +1,4 @@
-class FieldTypes():
+class FieldTypes:
 
     def __init__(self, attr=None, kvattr=None, val=None, key=None):
         self.attributes = attr
@@ -33,12 +33,35 @@ class FieldTypes():
     def __repr__(self):
         return "<Vcard %s Field Object>" % self.__class__.__name__
 
+# A type for Apple style Vcards (3.0), which allows unique naming of fields,
+# This is simply a class for figuring out, as well as parsing the field under normal
+# means of sanitation, and having a storage place for it, while waiting for more items
+# class Item:
+
+#     # In this case, key will be "item.x"
+#     def parse_all_attributes(self):
+#         for attribute, value in self.__dict__.items():
+            
+class Impp(FieldTypes):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.photo = self.values[0]
+
+class Bday(FieldTypes):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.photo = self.values[0]
+
 
 class Photo(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.version = self.values[0]
+        self.photo = self.values[0]
+
+
 
 
 class Version(FieldTypes):

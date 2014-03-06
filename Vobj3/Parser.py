@@ -47,7 +47,7 @@ class Parse():
     def __init__(self, vobj):
         self.vcard = vobj
         self.data = []
-        self.buff = []
+        self.buff = defaultdict(list)
 
     def parse(self):
         objects = defaultdict(list)
@@ -55,7 +55,7 @@ class Parse():
             # Dynamic creation of Field objects
             # Make sure we don't get begin, rev, or end, since they are not
             # fields that contain important data
-            if key.title() not in ("Begin", "Rev", "End"):
+            if key.title() not in ("Begin", "Rev", "End", "Prodid"):
 
                 # Go through the fields module, and use the name of the key to
                 # find our class, and create a link to it.
@@ -70,12 +70,24 @@ class Parse():
                                          dictofattrs,
                                          value.split(";"),
                                          key))
+        objects['Items'] = self.buff
+
         return objects
 
     def parse_attr(self, vcard):
         buf = StringIO()
         for line in self.vcard:
             key, sattrs, kwattrs, value = self.splitattrs(line.strip())
+
+            # There is probably a better place to put this, but w/e
+            # Basically, if we come across an "item", we will catch it
+            # and store it
+            # for later parsing, after the file is fully parsed
+            if key.startswith('item'):
+                item, key = key.split('.')
+                self.buff[item].append({key: value})
+                # Continue on to the next line
+                continue
 
             # When the encoding type is quoted-printable, this means
             # That there will be a line cont. sequence in the line
