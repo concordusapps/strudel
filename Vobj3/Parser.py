@@ -52,9 +52,17 @@ class Parse():
         objects = {}
         for key, attributes, dictofattrs, value in self.parse_attr(self.vcard):
             # Dynamic creation of Field objects
+            # Make sure we don't get begin, rev, or end, since they are not
+            # fields that contain important data
             if key.title() not in ("Begin", "Rev", "End"):
+
+                # Go through the fields module, and use the name of the key to
+                # find our class, and create a link to it.
                 field_type = getattr(Fields, key.title())
 
+                # Here we actually instantiate the field, and throw it in to
+                # a dictionary, in order for the Vobj class to iterate and
+                # use setattr() to itself.
                 objects[key.lower()] = field_type([a for a in attributes],
                                                   dictofattrs,
                                                   value.split(";"),
@@ -85,8 +93,36 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
+            # yield key, sattrs, kwattrs, value
+
+            # Check if its a b64 encoded value
+            if kwattrs.get('encoding') == 'base64':
+                # Yes? write the line to a buffer,
+                # since its probably more than one line
+                buf.write(value)
+                # Keep iterating through each line until we get what we want
+                while True:
+                    next_line = self.vcard.readline().replace("\n", "")
+                    # import ipdb; ipdb.set_trace()
+                    buf.write(next_line)
+                    # In this case, we want to check if the line does not start
+                    # With a space, or an indention.
+                    if not next_line.startswith(" "):
+                        # set the value of the field to the b64
+                        value = buf.getvalue()
+                        # Return the file to its original state before we
+                        # Started fucking around with it
+                        buf.seek(0)
+                        buf.truncate()
+                        break
+
             yield key, sattrs, kwattrs, value
 
+    ###
+    # A function that splits key value attributes, from single attributes,
+    # i.e, "PREF"(Single) vs "ENCODING=PRINTABLE"(Key-Value)
+    # And returns they key(string), attributes(string), kwattributes(dict), and
+    # The value of the field (string)
     def splitattrs(self, line):
         names, value = line.split(':', 1)
         source_attrs = names.split(';')
@@ -104,5 +140,6 @@ class Parse():
 
         return key, attrs, kwattrs, value
 
+    # A function that does absolutely nothing (yet)
     def serialize(self, key, attributes, value):
         self.data.append({key: {"Values": value, "attributes": attributes}})

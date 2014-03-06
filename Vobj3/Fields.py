@@ -34,6 +34,13 @@ class FieldTypes():
         return "<Vcard %s Field Object>" % self.__class__.__name__
 
 
+class Photo(FieldTypes):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.version = self.values[0]
+
+
 class Version(FieldTypes):
     """The version of the vCard specification."""
 
