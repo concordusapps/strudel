@@ -1,5 +1,6 @@
 from io import StringIO
 from . import Fields
+from collections import defaultdict
 
 
 class Parse():
@@ -49,7 +50,7 @@ class Parse():
         self.buff = []
 
     def parse(self):
-        objects = {}
+        objects = defaultdict(list)
         for key, attributes, dictofattrs, value in self.parse_attr(self.vcard):
             # Dynamic creation of Field objects
             # Make sure we don't get begin, rev, or end, since they are not
@@ -63,11 +64,12 @@ class Parse():
                 # Here we actually instantiate the field, and throw it in to
                 # a dictionary, in order for the Vobj class to iterate and
                 # use setattr() to itself.
-                objects[key.lower()] = field_type([a for a in attributes],
-                                                  dictofattrs,
-                                                  value.split(";"),
-                                                  key)
+                values = objects[key.lower()]
 
+                values.append(field_type(list(attributes),
+                                         dictofattrs,
+                                         value.split(";"),
+                                         key))
         return objects
 
     def parse_attr(self, vcard):
@@ -95,8 +97,8 @@ class Parse():
                         break
             # yield key, sattrs, kwattrs, value
 
-            # Check if its a b64 encoded value
-            if kwattrs.get('encoding') == 'base64':
+            # Check if its a b64 encoded value, "b" in vcard 3
+            if kwattrs.get('encoding') in ('base64', 'b'):
                 # Yes? write the line to a buffer,
                 # since its probably more than one line
                 buf.write(value)
