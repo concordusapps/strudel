@@ -39,7 +39,6 @@ class FieldTypes:
     # it, while waiting for more items class Item:
 
     # In this case, key will be "item.x"
-
     # def parse_all_attributes(self):
         # for attribute, value in self.__dict__.items():
 
@@ -72,14 +71,6 @@ class Version(FieldTypes):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.version = self.values[0]
-
-
-class Prodid(FieldTypes):
-    """The identifier for the product that created the vCard object."""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.prodid = self.values[0]
 
 
 class N(FieldTypes):

@@ -1,6 +1,6 @@
-from io import StringIO
 from . import Fields
 from collections import defaultdict
+from io import StringIO
 
 
 class Parse():

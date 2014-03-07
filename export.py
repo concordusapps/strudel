@@ -1,19 +1,16 @@
-from Vobj3 import vobj
-import os
-
-
-class VcardExporter(Vobj):
+class VcardExporter():
     """Write the Vobj back to a file"""
 
-    def __init__(self, vobj):
-        self.vobj = vobj
-        self.filename = vobj.
+    def export_to_file(vobj):
 
-    def export_to_file():
-
-        #fix this later, work in progress
-        filename = "Testing.vcf"
+        filename = str(vobj.fn[0])
 
         target = open(filename, 'w+')
+
+        target.write('BEGIN:VCARD\n')
+        target.write(vobj.version[0].vformat() + '\n')
+        target.write(vobj.n[0].vformat() + '\n')
+        target.write(vobj.fn[0].vformat() + '\n')
+        target.write(vobj.org[0].vformat() + '\n')
 
         target.close()
