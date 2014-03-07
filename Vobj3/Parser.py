@@ -117,11 +117,12 @@ class Parse():
                 # Keep iterating through each line until we get what we want
                 while True:
                     next_line = self.vcard.readline().replace("\n", "")
-                    # import ipdb; ipdb.set_trace()
-                    buf.write(next_line)
-                    # In this case, we want to check if the line does not start
-                    # With a space, or an indention.
-                    if not next_line.startswith(" "):
+
+                    # Check if the line starts with a space, or an indention.
+                    if next_line.startswith(" "):
+                        buf.write(next_line)
+
+                    else:
                         # set the value of the field to the b64
                         value = buf.getvalue()
                         # Return the file to its original state before we
@@ -129,7 +130,6 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
-
             yield key, sattrs, kwattrs, value
 
     ###
