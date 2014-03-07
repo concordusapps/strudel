@@ -24,7 +24,7 @@ class FieldTypes:
 
         attr = ";".join([x.upper() for x in self.attributes])
         values = ";".join(self.values)
-        return "%s;%s%s:%s" % (self.key, attr, kvattr, values)
+        return "%s%s%s:%s" % (self.key, attr, kvattr, values)
 
     def __str__(self):
         # Return the value on str(object)
