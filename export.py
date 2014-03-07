@@ -1,14 +1,12 @@
-# import os.path as p
-# from collections import defaultdict
-
 
 class VcardExporter():
     """Write the Vobj back to a file"""
 
     def export_to_file(vobj):
         """Warning! Current version will overwrite vcards for
-        people with the same first and last name"""
+        people with the same 'Fn' field"""
 
+        # Sets filename to The formatted name string associated with the vCard
         filename = str(vobj.fn[0]) + '.vcf'
 
         # if p.isfile('./' + filename):
@@ -18,7 +16,9 @@ class VcardExporter():
 
         target.write('BEGIN:VCARD\n')
 
-        members = [attr for attr in dir(vobj) if not callable(attr) and not attr.startswith("__")]
+        # Get list of vobj fields
+        members = [attr for attr in dir(vobj) if not callable(attr) and not (
+            attr.startswith("__"))]
 
         # blah = [attr for attr in members if attr[0] != defaultdict(list)]
 
