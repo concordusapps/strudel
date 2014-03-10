@@ -1,4 +1,5 @@
 from .Parser import Parse
+import os
 
 
 class Vobj(object):
@@ -17,15 +18,18 @@ class Vobj(object):
             setattr(self, k, v)
 
     def export(self):
-        """Write the Vobj back to a file
-        Warning! Current version will overwrite vcards for
-        people with the same 'Fn' field"""
+        """Write the Vobj back to a file"""
 
-        # Sets filename to The formatted name string associated with the vCard
-        filename = str(self.fn[0]) + '.vcf'
+        # A platform independent way to set export directory
+        export_directory = os.path.join(os.getcwd(), 'Vobj3', 'exported')
+        os.chdir(export_directory)
 
-        # if p.isfile('./' + filename):
-        #     filename + 'copy'
+        # Sets filename to "The formatted name string associated with the
+        # vCard" joined with the correct path
+        filename = os.path.join(export_directory, str(self.fn[0]) + '.vcf')
+
+        if os.path.isfile(filename):
+            filename = filename + '.copy'
 
         target = open(filename, 'w+')
 
