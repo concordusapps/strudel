@@ -70,7 +70,10 @@ class Parse():
                                          dictofattrs,
                                          value.split(";"),
                                          key))
-        objects['Items'] = self.buff
+
+        #Check if items is an empty default dict, if so, we dont need it
+        if not isinstance(self.buff, defaultdict):
+            objects['Items'] = self.buff
 
         return objects
 
