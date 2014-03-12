@@ -1,12 +1,13 @@
 class FieldTypes:
 
     def __init__(self, attr=None, kvattr=None, val=None, key=None):
-        self.attributes = attr
-        self.kvattributes = kvattr
+        self.attributes = attr or []
+        self.kvattributes = kvattr or {}
         self.values = val
         self.is_preferred = False
-        self.key = key
-        self.parse_attributes()
+        self.key = key or type(self).__name__.upper()
+        if self.attributes is not None:
+            self.parse_attributes()
 
     def parse_attributes(self):
         self.is_preferred = False
@@ -15,7 +16,7 @@ class FieldTypes:
             del self.attributes[self.attributes.index("PREF")]
             self.types = self.values
 
-    def vformat(self):
+    def vformat(self, version="2.1"):
         kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
                            for key, value in self.kvattributes.items()])
 
@@ -48,21 +49,21 @@ class Impp(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.photo = self.values[0]
+        # self.photo = self.values[0]
 
 
 class Bday(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.photo = self.values[0]
+        # self.photo = self.values[0]
 
 
 class Photo(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.photo = self.values[0]
+        # self.photo = self.values[0]
 
 
 class Version(FieldTypes):
@@ -70,7 +71,7 @@ class Version(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.version = self.values[0]
+        # self.version = self.values[0]
 
 
 class N(FieldTypes):
@@ -79,7 +80,7 @@ class N(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.n = " ".join(self.values)
+        # self.n = " ".join(self.values)
 
 
 class Fn(FieldTypes):
@@ -87,16 +88,16 @@ class Fn(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.full_name = self.values[0]
+        # self.full_name = self.values[0]
 
 
 class Org(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.name = self.values[-1]
-        self.unit = [self.values[1:]]
-
+        # self.name = self.values[-1]
+        # self.unit = [self.values[1:]]
+#
 
 class Title(FieldTypes):
     """Specifies the job title, functional position or function of the
@@ -104,7 +105,6 @@ class Title(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.title = self.values[0]
 
 
 class Tel(FieldTypes):
@@ -129,13 +129,13 @@ class Adr(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.parse_address()
+    #     self.parse_address()
 
-    def parse_address(self):
-        params = ['post_office', 'extended', 'address', 'locality', 'region',
-                  'zipcode', 'country']
-        for attribute, value in zip(params, self.values):
-            setattr(self, attribute, value)
+    # def parse_address(self):
+    #     params = ['post_office', 'extended', 'address', 'locality', 'region',
+    #               'zipcode', 'country']
+    #     for attribute, value in zip(params, self.values):
+    #         setattr(self, attribute, value)
 
 
 class Label(FieldTypes):
@@ -151,11 +151,11 @@ class Url(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.url = self.values[-1]
+        # self.url = self.values[-1]
 
 
 class Email(FieldTypes):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.email = self.values[-1]
+        # self.email = self.values[-1]
