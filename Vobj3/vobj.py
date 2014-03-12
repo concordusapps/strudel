@@ -7,7 +7,6 @@ class Vobj(object):
         self.parse(vobj)
 
     def parse(self, vobj):
-        # Check if a string was provided, and assume its a path
         if isinstance(vobj, str):
             vobj = open(vobj)
 
