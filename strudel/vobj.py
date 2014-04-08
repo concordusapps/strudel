@@ -152,16 +152,29 @@ class VCard:
             "suffix": 4})
 
     def __iter__(self):
+        # Yield prologue
+        yield "BEGIN:VCARD\n"
+
+        # Yield version initially.
+        yield self._data['VERSION'][0].vformat()
+
         for name, value in self._data.items():
+
+            # Version was already provided; skip.
+            if name == 'VERSION':
+                continue
 
             if isinstance(value, Sequence):
                 for sub in value:
                     yield sub.vformat(self.version)
-                    yield "\n"
+                    # yield "\n"
 
             else:
                 yield value.vformat(self.version)
-                yield "\n"
+                # yield "\n"
+
+        # Yield epilogue
+        yield "END:VCARD\n"
 
     def __str__(self):
         io = StringIO()
