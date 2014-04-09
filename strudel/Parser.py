@@ -50,9 +50,12 @@ class Parse():
         self.buff = defaultdict(list)
 
     def parse(self):
-        objects = defaultdict(list)
+        vcards = []
         for key, attributes, dictofattrs, value in self.parse_attr(self.vcard):
             # Dynamic creation of Field objects
+
+            if key.title() == "Begin":
+                objects = defaultdict(list)
             # Make sure we don't get begin, rev, or end, since they are not
             # fields that contain important data
             if key.title() not in ("Begin", "Rev", "End", "Prodid"):
@@ -70,12 +73,14 @@ class Parse():
                                          dictofattrs,
                                          value.split(";"),
                                          key))
+            if key.title() == "End":
+                vcards.append(objects)
 
         #Check if items is an empty default dict, if so, we dont need it
         if not isinstance(self.buff, defaultdict):
             objects['Items'] = self.buff
 
-        return objects
+        return vcards
 
     def parse_attr(self, vcard):
         buf = StringIO()

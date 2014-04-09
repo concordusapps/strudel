@@ -90,8 +90,13 @@ class VCard:
             if managed:
                 source.close()
 
+        # Turns the list of data and into a list of VCards
+        vcards = []
+        for card in data:
+            vcards.append(VCard(card))
+
         # Store the data in a new vcard and return it.
-        return VCard(data)
+        return vcards
 
     def __getitem__(self, name):
         return self._data[name]
@@ -156,12 +161,12 @@ class VCard:
         yield "BEGIN:VCARD\n"
 
         # Yield version initially.
-        yield self._data['VERSION'][0].vformat()
+        yield self._data['version'][0].vformat()
 
         for name, value in self._data.items():
 
             # Version was already provided; skip.
-            if name == 'VERSION':
+            if name == 'version':
                 continue
 
             if isinstance(value, Sequence):

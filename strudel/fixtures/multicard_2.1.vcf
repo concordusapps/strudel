@@ -1,0 +1,58 @@
+BEGIN:VCARD
+VERSION:2.1
+N:Doe;John;;;
+FN:John Doe
+TEL;HOME:1-234-567-8910
+TEL;WORK:(111) 555-1212
+EMAIL;HOME:john@doe.com
+ADR;HOME:;;1234 Fake St;San Francisco;Ca;9888;
+PHOTO;GIF:http://www.johndoe.com/dir_photos/my_photo.gif
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Smith;Bob;;;
+FN:Bob Smith
+TEL;HOME:1-456-951-7209
+EMAIL;TYPE=INTERNET:bsmith@googles.com
+ADR;HOME:;;1234 Fake St;Sacramento;Ca;95827;
+PHOTO;GIF:http://www.bobsmith.com/my_photo.gif
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Jones;Mike;;;
+FN:Mike Jones
+TEL;HOME:1-559-789-8910
+EMAIL;HOME:mike@jones.com
+ADR;HOME:;;1234 Awesome St;San Francisco;Ca;9888;
+PHOTO;GIF:http://www.mikejones.com/dir_photos/my_photo.gif
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Bob;Billy;;;
+FN:Billy Bob
+TEL;HOME:1-234-567-8910
+TEL;WORK:(111) 555-1212
+EMAIL;HOME:billy@goggles.com
+ADR;HOME:;;1234 Cool St;San Francisco;Ca;9888;
+PHOTO;GIF:http://www.billybob.com/dir_photos/my_photo.gif
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Dude;Some;;;
+FN:Some Dude
+TEL;HOME:1-234-567-8910
+TEL;WORK:(111) 555-1212
+EMAIL;HOME:some@dude.com
+ADR;HOME:;;1234 Fake St;San Francisco;Ca;9888;
+PHOTO;GIF:http://www.somedude.com/my_photo.gif
+END:VCARD
+BEGIN:VCARD
+VERSION:2.1
+N:Guy;This;;;
+FN:This Guy
+TEL;HOME:1-234-567-8910
+TEL;WORK:(111) 555-1212
+EMAIL;HOME:this@guy.com
+ADR;HOME:;;1234 Fake St;San Francisco;Ca;9888;
+PHOTO;GIF:http://www.thisguy.com/dir_photos/my_photo.gif
+END:VCARD
