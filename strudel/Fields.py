@@ -17,16 +17,33 @@ class FieldTypes:
             self.types = self.values
 
     def vformat(self, version="2.1"):
-        kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
-                           for key, value in self.kvattributes.items()])
+        # import ipdb; ipdb.set_trace()
+        kvattr = ''
 
-        if kvattr:
-            kvattr = ";" + kvattr
+        for key, value in self.kvattributes.items():
+            if key == 'type':
+                # import ipdb; ipdb.set_trace()
+                for x in value:
+                    kvattr += ";%s=%s" % (key.upper(), x.upper())
+            else:
+                kvattr += ";%s=%s" % (key.upper(), value.upper())
+
+        # if 'type' in self.kvattributes:
+        #     kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
+        #                     for key, value in self.kvattributes.items()])
+        # else:
+        #     kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
+        #                     for key, value in self.kvattributes.items()])
+
+        # if kvattr:
+        #     kvattr = ";" + kvattr
 
         attr = ";".join([x.upper() for x in self.attributes])
         values = ";".join(self.values)
         if attr or kvattr:
-            return "%s;%s%s:%s\n" % (self.key, attr, kvattr, values)
+            if attr:
+                attr = ";" + attr
+            return "%s%s%s:%s\n" % (self.key, attr, kvattr, values)
         else:
             return "%s:%s\n" % (self.key, values)
 
@@ -100,7 +117,7 @@ class Org(FieldTypes):
         super().__init__(*args, **kwargs)
         # self.name = self.values[-1]
         # self.unit = [self.values[1:]]
-#
+
 
 class Title(FieldTypes):
     """Specifies the job title, functional position or function of the

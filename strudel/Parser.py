@@ -156,7 +156,13 @@ class Parse():
         for attr in source_attrs:
             if "=" in attr:
                 kwkey, kwvalue = attr.split("=", 1)
-                kwattrs[kwkey.lower()] = kwvalue.lower()
+                if kwkey.lower() == 'type':
+                    if 'type' not in kwattrs:
+                        kwattrs['type'] = [kwvalue.lower()]
+                    else:
+                        kwattrs['type'] += [kwvalue.lower()]
+                else:
+                    kwattrs[kwkey.lower()] = kwvalue.lower()
             else:
                 attrs.add(attr.lower())
 
