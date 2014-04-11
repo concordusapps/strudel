@@ -28,16 +28,6 @@ class FieldTypes:
             else:
                 kvattr += ";%s=%s" % (key.upper(), value.upper())
 
-        # if 'type' in self.kvattributes:
-        #     kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
-        #                     for key, value in self.kvattributes.items()])
-        # else:
-        #     kvattr = ";".join(["%s=%s" % (key.upper(), value.upper())
-        #                     for key, value in self.kvattributes.items()])
-
-        # if kvattr:
-        #     kvattr = ";" + kvattr
-
         attr = ";".join([x.upper() for x in self.attributes])
         values = ";".join(self.values)
         if attr or kvattr:
