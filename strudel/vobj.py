@@ -161,7 +161,7 @@ class VCard:
         yield "BEGIN:VCARD\n"
 
         # Yield version initially.
-        yield self._data['version'][0].vformat()
+        #yield self._data['version'][0].vformat()
 
         for name, value in self._data.items():
 
