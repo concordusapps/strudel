@@ -115,8 +115,8 @@ class VCard:
             else:
                 sfdgh
 
-        except KeyError:
-            raise AttributeError
+        except (KeyError, IndexError):
+            return None
 
     def __setattr__(self, name, value):
         # Short-circuit if we're a thing.
@@ -187,30 +187,3 @@ class VCard:
             io.write(chunk)
         io.seek(0)
         return io.read()
-
-
-# class Vobj(object):
-
-#     def __init__(self, vobj):
-#         self.parse(vobj)
-
-#     def parse(self, vobj):
-#         if isinstance(vobj, str):
-#             vobj = open(vobj)
-
-#         y = Parse(vobj)
-#         objects = y.parse()
-
-#         for k, v in objects.items():
-#             setattr(self, k, v)
-
-
-#     # def vformat(self, version=2.1):
-
-#     #     for attr in self.__dict__:
-
-    #         if isinstance(attr, list):
-    #             for subattr in attr:
-    #                 yield subattr.vformat() + '\n'
-
-    #         yield attr.vformat() + '\n'

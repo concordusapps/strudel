@@ -60,9 +60,13 @@ class Parse():
             # fields that contain important data
             if key.title() not in ("Begin", "Rev", "End", "Prodid"):
 
-                # Go through the fields module, and use the name of the key to
-                # find our class, and create a link to it.
-                field_type = getattr(Fields, key.title())
+                try:
+                    # Go through the fields module, and use the name of the key to
+                    # find our class, and create a link to it.
+                    field_type = getattr(Fields, key.title())
+
+                except AttributeError:
+                    continue
 
                 # Here we actually instantiate the field, and throw it in to
                 # a dictionary, in order for the Vobj class to iterate and
@@ -73,6 +77,7 @@ class Parse():
                                          dictofattrs,
                                          value.split(";"),
                                          key))
+
             if key.title() == "End":
                 vcards.append(objects)
 
@@ -84,7 +89,37 @@ class Parse():
 
     def parse_attr(self, vcard):
         buf = StringIO()
-        for line in self.vcard:
+        last_line = None
+        vcf_iter = iter(self.vcard)
+        while True:
+            if last_line is not None:
+                line = last_line
+                last_line = None
+            else:
+                line = next(vcf_iter)
+                if not line:
+                    break
+
+            # Remove the trailing newline and whitespace.
+            line = line.strip("\n").strip()
+
+            # Ignore blank lines.
+            if not line:
+                continue
+
+            # We need to pull the next lines into us if they start with
+            # a space, because that apparently is the spec.
+            while True:
+                try:
+                    last_line = next(vcf_iter)
+                    if last_line[0] == " ":
+                        line += last_line.strip()
+                    else:
+                        break
+
+                except StopIteration:
+                    break
+
             key, sattrs, kwattrs, value = self.splitattrs(line.strip())
 
             # There is probably a better place to put this, but w/e
@@ -115,29 +150,7 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
-            # yield key, sattrs, kwattrs, value
 
-            # Check if its a b64 encoded value, "b" in vcard 3
-            if kwattrs.get('encoding') in ('base64', 'b'):
-                # Yes? write the line to a buffer,
-                # since its probably more than one line
-                buf.write(value)
-                # Keep iterating through each line until we get what we want
-                while True:
-                    next_line = self.vcard.readline().replace("\n", "")
-
-                    # Check if the line starts with a space, or an indention.
-                    if next_line.startswith(" "):
-                        buf.write(next_line)
-
-                    else:
-                        # set the value of the field to the b64
-                        value = buf.getvalue()
-                        # Return the file to its original state before we
-                        # Started fucking around with it
-                        buf.seek(0)
-                        buf.truncate()
-                        break
             yield key, sattrs, kwattrs, value
 
     ###
