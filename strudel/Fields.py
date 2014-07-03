@@ -16,8 +16,17 @@ class FieldTypes:
             del self.attributes[self.attributes.index("PREF")]
             self.types = self.values
 
+    # Vcard spec says to fold lines after 75 characters, this checks and does
+    # just that.
+    def fold(self, line):
+        if len(line) <= 75:
+            return line
+
+        lines = " \r\n".join([line[i:i + 75] for i in range(0, len(line), 75)])
+
+        return lines
+
     def vformat(self, version="2.1"):
-        # import ipdb; ipdb.set_trace()
         kvattr = ''
 
         for key, value in self.kvattributes.items():
@@ -33,9 +42,10 @@ class FieldTypes:
         if attr or kvattr:
             if attr:
                 attr = ";" + attr
-            return "%s%s%s:%s\n" % (self.key, attr, kvattr, values)
+            return self.fold("%s%s%s:%s\r\n" % (self.key, attr, kvattr,
+                                                values))
         else:
-            return "%s:%s\n" % (self.key, values)
+            return self.fold("%s:%s\r\n" % (self.key, values))
 
     def __str__(self):
         # Return the value on str(object)
@@ -55,6 +65,7 @@ class FieldTypes:
 
 
 class Impp(FieldTypes):
+
     """Instant Messaging and Presence Protocol"""
 
     def __init__(self, *args, **kwargs):
@@ -77,6 +88,7 @@ class Photo(FieldTypes):
 
 
 class Version(FieldTypes):
+
     """The version of the vCard specification."""
 
     def __init__(self, *args, **kwargs):
@@ -85,6 +97,7 @@ class Version(FieldTypes):
 
 
 class N(FieldTypes):
+
     """A structured representation of the name of the person, place or thing
     associated with the vCard """
 
@@ -94,6 +107,7 @@ class N(FieldTypes):
 
 
 class Fn(FieldTypes):
+
     """The formatted name string associated with the vCard"""
 
     def __init__(self, *args, **kwargs):
@@ -110,6 +124,7 @@ class Org(FieldTypes):
 
 
 class Title(FieldTypes):
+
     """Specifies the job title, functional position or function of the
     individual associated with the vCard """
 
@@ -118,6 +133,7 @@ class Title(FieldTypes):
 
 
 class Tel(FieldTypes):
+
     """Telephone field object"""
 
     def __init__(self, *args, **kwargs):
@@ -125,6 +141,7 @@ class Tel(FieldTypes):
 
 
 class Adr(FieldTypes):
+
     """ The address field, the value will always follow
         the following:
              the post office box;
@@ -149,6 +166,7 @@ class Adr(FieldTypes):
 
 
 class Label(FieldTypes):
+
     """Represents the actual text that should be put on the mailing label
     when delivering a physical package to the person/object associated with
     the vCard (related to the ADR property)."""
