@@ -2,14 +2,7 @@ vcf = VCard()
 vcf.full_name = "Ryan Leckey"
 vcf.name.first = "Ryan"
 vcf.name.last = "Leckey"
-# vcf.phone.append("916-800-2370", attributes="..", label="Bobs")
+vcf.phone.append("916-800-2370", attributes="..", label="Bobs")
 # vcf.photo.write(open("...", "rb").read())  # type(vcf.photo) == BytesIO
 # vcf.photo = open("...", 'rb')
 # vcf.photo = "..."
-# vcf.phone.append("916-555-4859", type="fax")
-vcf.title = "CTO"
-vcf.organization = "Concordus Applications, Inc."
-# vcf.email.append("rleckey@concordusapps.com", type="Work")
-# vcf.location.append(address="1791 Tribute Rd.", type="Office")
-
-open("rl.vcf", "w").write(vcf)
