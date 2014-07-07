@@ -144,6 +144,10 @@ class Tel(FieldTypes):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+    def append(self, phone_number='', name=''):
+        self.attributes.append(name)
+        self.attributes.append(phone_number)
+
 
 class Adr(FieldTypes):
 

@@ -147,6 +147,13 @@ class VCard:
         return self._data['PHOTO'][0]
 
     @property
+    def phone(self):
+        if 'TEL' not in self._data:
+            self._data['TEL'] = []
+
+        return self._data['TEL'][0]
+
+    @property
     def name(self):
         if 'N' not in self._data:
             self._data['N'] = []
