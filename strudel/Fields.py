@@ -22,7 +22,7 @@ class FieldTypes:
         if len(line) <= 75:
             return line
 
-        lines = " \r\n".join([line[i:i + 75] for i in range(0, len(line), 75)])
+        lines = "\r\n ".join([line[i:i + 75] for i in range(0, len(line), 75)])
 
         return lines
 
@@ -31,7 +31,6 @@ class FieldTypes:
 
         for key, value in self.kvattributes.items():
             if key == 'type':
-                # import ipdb; ipdb.set_trace()
                 for x in value:
                     kvattr += ";%s=%s" % (key.upper(), x.upper())
             else:
@@ -85,6 +84,12 @@ class Photo(FieldTypes):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # self.photo = self.values[0]
+
+    def __str__(self):
+        return self.values[0]
+
+    def __repr__(self):
+        return self.values[0]
 
 
 class Version(FieldTypes):

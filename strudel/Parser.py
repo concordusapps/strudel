@@ -150,7 +150,29 @@ class Parse():
                         buf.seek(0)
                         buf.truncate()
                         break
+            # yield key, sattrs, kwattrs, value
 
+            # Check if its a b64 encoded value, "b" in vcard 3
+            if kwattrs.get('encoding') in ('base64', 'b'):
+                # Yes? write the line to a buffer,
+                # since its probably more than one line
+                buf.write(value)
+                # Keep iterating through each line until we get what we want
+                while True:
+                    next_line = self.vcard.readline().replace("\n", "")
+
+                    # Check if the line starts with a space, or an indention.
+                    if next_line.startswith(" "):
+                        buf.write(next_line)
+
+                    else:
+                        # set the value of the field to the b64
+                        value = buf.getvalue()
+                        # Return the file to its original state before we
+                        # Started fucking around with it
+                        buf.seek(0)
+                        buf.truncate()
+                        break
             yield key, sattrs, kwattrs, value
 
     ###

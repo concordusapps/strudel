@@ -37,7 +37,7 @@ class NamedMutator:
             self._data[0].values[self._indicies[name]] = value
 
         except KeyError:
-            raise AttributeError
+            raise AttributeError()
 
 
 class VCard:
@@ -77,7 +77,7 @@ class VCard:
             source = open(source, "r")
 
         try:
-            # Parse the source to yield le vcards.
+            # Parse the source to yield vcards.
             m = Parse(source)
             data = m.parse()
 
@@ -112,8 +112,6 @@ class VCard:
             item = self._simple_map[name]
             if item['scalar']:
                 return str(self._data[item['key']][0])
-            else:
-                sfdgh
 
         except (KeyError, IndexError):
             return None
@@ -138,18 +136,22 @@ class VCard:
 
                 data.values = [value]
 
-            else:
-                sdgjm
-
         except KeyError:
             raise AttributeError
 
     @property
-    def name(self):
-        if 'n' not in self._data:
-            self._data['n'] = []
+    def photo(self):
+        if 'PHOTO' not in self._data:
+            self._data['PHOTO'] = []
 
-        return NamedMutator(self._data['n'], Fields.N, {
+        return self._data['PHOTO'][0]
+
+    @property
+    def name(self):
+        if 'N' not in self._data:
+            self._data['N'] = []
+
+        return NamedMutator(self._data['N'], Fields.N, {
             "last": 0,
             "first": 1,
             "middle": 2,
@@ -161,7 +163,7 @@ class VCard:
         yield "BEGIN:VCARD\n"
 
         # Yield version initially.
-        #yield self._data['version'][0].vformat()
+        # yield self._data['version'][0].vformat()
 
         for name, value in self._data.items():
 
