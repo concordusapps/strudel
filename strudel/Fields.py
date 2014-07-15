@@ -13,7 +13,7 @@ class FieldTypes:
         self.is_preferred = False
         if "pref" in self.attributes:
             self.is_preferred = True
-            del self.attributes[self.attributes.index("PREF")]
+            del self.attributes[self.attributes.index("pref")]
             self.types = self.values
 
     # Vcard spec says to fold lines after 75 characters, this checks and does
