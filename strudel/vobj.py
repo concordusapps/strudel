@@ -1,6 +1,10 @@
 from .Parser import Parse
 from . import Fields
-from collections.abc import Sequence
+try:
+    from collections.abc import Sequence
+except ImportError:
+    # Backwards compatibility to python <= 3.2
+    from collections import Sequence
 from io import StringIO
 
 
